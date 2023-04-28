@@ -1,6 +1,17 @@
-const http = require('http'),
-fs = require('fs'),
-url = require('url');
+const express = require('express'),
+    bodyParser = require ('body-parser'),
+    uuid = require('uuid'),
+    morgan = require('morgan'),
+    http = require('http'),
+    fs = require('fs'),
+    url = require('url');
+
+const app = express();
+
+app.use(body-parser.json());
+
+
+
 
 http.createServer((request, response) => {
     let addr = request.url,
