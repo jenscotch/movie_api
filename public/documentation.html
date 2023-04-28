@@ -9,5 +9,139 @@
                 This is a REST API for an application called "BECHDELFLIX" that interacts
                 with a database that stores different data about movies.
             </p>
+            <p>
+            <h2>Endpoint /movies</h2>
+                url: localhost:8081/movies
+                <br>
+                returns: the endpoint will return the entire list of movies that are stored in the "movies" array.
+                <br>
+                method: GET
+                <br>
+                parameters: needs to be part of the "movies" array
+                <br>
+                the response data will be in the following format (repeating for every movie in the array):<br>
+                {
+                    title: (movieTitle),
+                    director: {
+                        name: (directorName)
+                    },
+                    genre: {
+                        name: (genreName)
+                    },
+                    imageURL: (url),
+                    description: (movieDescription)
+                }<br>
+
+            <h2>Endpoint /movies/title</h2>
+                url: localhost:8081/movies/movieTitle
+                <br>
+                returns: the endpoint will return the movie title, as well as the rest of the information (director, genre, image, description) for the movie.
+                <br>
+                method: GET
+                <br>
+                parameters: needs to have the same movie title as what is entered in the endpoint for "movieTitle"
+                <br>
+                the response data will be in the following format:<br>
+                {
+                    title: (movieTitle),
+                    director: {
+                        name: (directorName)
+                    },
+                    genre: {
+                        name: (genreName)
+                    },
+                    imageURL: (url),
+                    description: (movieDescription)
+                }<br>
+
+            <h2>Endpoint /movies/genre/genreName</h2>
+                url: localhost:8081/movies/genre/genreName
+                <br>
+                returns: the endpoint will return the genre name that is put in the endpoint (i.e., Comedy, Drama, Romance, etc.)
+                <br>
+                method: GET
+                <br>
+                parameters: must be a known genre (i.e., Comedy, Drama, Action, Romance, etc.)
+                <br>
+                the response data will be in the following format:<br>
+                {"name": "genreName"}<br>
+
+            <h2>Endpoint /movies/director/directorName</h2>
+                url: localhost:8081/movies/director/directorName
+                <br>
+                returns: the endpoint will return the director's name that is put in the endpoint
+                <br>
+                method: GET
+                <br>
+                parameters: must be a name
+                <br>
+                the response data will be in the following format:<br>
+                {"name": "directorName"}<br>
+            
+            <h2>Endpoint add new user</h2>
+                url: localhost:8081/users
+                <br>
+                returns: the endpoint will return what is input into the raw JSON data, as well as a user-specific ID
+                <br>
+                method: POST
+                <br>
+                parameters: must be a brand new user of the app
+                <br>
+                the response data will be in the following format:<br>
+                {"name": "userName",
+                 "favoriteMovies": [],
+                 "id": "userId"
+                }<br>
+
+            <h2>Endpoint add new movie to existing user</h2>
+                url: localhost:8081/users/userId/movieTitle
+                <br>
+                returns: the endpoint will return a confirmation that the new movie has been added to the user's array
+                <br>
+                method: POST
+                <br>
+                parameters: must be a movie
+                <br>
+                the response data will be in the following format:<br>
+                "movieTitle has been added to userId's array"<br>
+
+            <h2>Endpoint update user name</h2>
+                url: localhost:8081/users/userId
+                <br>
+                returns: the endpoint will return the updated user name
+                <br>
+                method: PUT
+                <br>
+                parameters: must be a name
+                <br>
+                the response data will be in the following format:<br>
+                {"id": userId,
+                 "name": updated userName,
+                 "favoriteMovies": [] }<br>
+
+            <h2>Endpoint delete user's movie</h2>
+                url: localhost:8081/users/userId/movieTitle
+                <br>
+                returns: the endpoint will return "movieTitle has been removed from userId's array"
+                <br>
+                method: DELETE
+                <br>
+                parameters: must be a movieTitle in the user's array
+                <br>
+                the response data will be in the following format:<br>
+                "movieTitle has been removed from userId's array"<br>
+
+            <h2>Endpoint delete user</h2>
+                url: localhost:8081/users/userId
+                <br>
+                returns: the endpoint will return "userId has been deleted"
+                <br>
+                method: DELETE
+                <br>
+                parameters: must be a user in the system
+                <br>
+                the response data will be in the following format:<br>
+                "userId has been deleted"<br>
+            </p>
         </body>
 </html>
