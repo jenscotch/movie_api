@@ -15,21 +15,26 @@
                 <br>
                 returns: the endpoint will return the entire list of movies that are stored in the "movies" array.
                 <br>
-                method: GET
+                method: GET, using Mongoose models and JSON
                 <br>
                 parameters: needs to be part of the "movies" array
                 <br>
                 the response data will be in the following format (repeating for every movie in the array):<br>
                 {
                     title: (movieTitle),
+                    description: (movieDescription),
                     director: {
-                        name: (directorName)
+                        name: (directorName),
+                        bio: (directorBio),
+                        birth: (directorBirthDate)
                     },
                     genre: {
-                        name: (genreName)
+                        name: (genreName),
+                        description: (genreDescription)
                     },
-                    imageURL: (url),
-                    description: (movieDescription)
+                    featured: boolean,
+                    actors: [],
+                    imageURL: (url)
                 }<br>
 
             <h2>Endpoint /movies/title</h2>
@@ -37,21 +42,26 @@
                 <br>
                 returns: the endpoint will return the movie title, as well as the rest of the information (director, genre, image, description) for the movie.
                 <br>
-                method: GET
+                method: GET, using Mongoose models and JSON
                 <br>
                 parameters: needs to have the same movie title as what is entered in the endpoint for "movieTitle"
                 <br>
                 the response data will be in the following format:<br>
                 {
                     title: (movieTitle),
+                    description: (movieDescription),
                     director: {
-                        name: (directorName)
+                        name: (directorName),
+                        bio: (directorBio),
+                        birth: (directorBirthDate)
                     },
                     genre: {
-                        name: (genreName)
+                        name: (genreName),
+                        description: (genreDescription)
                     },
-                    imageURL: (url),
-                    description: (movieDescription)
+                    featured: boolean,
+                    actors: [],
+                    imageURL: (url)
                 }<br>
 
             <h2>Endpoint /movies/genre/genreName</h2>
@@ -59,36 +69,42 @@
                 <br>
                 returns: the endpoint will return the genre name that is put in the endpoint (i.e., Comedy, Drama, Romance, etc.)
                 <br>
-                method: GET
+                method: GET, using Mongoose models and JSON
                 <br>
                 parameters: must be a known genre (i.e., Comedy, Drama, Action, Romance, etc.)
                 <br>
                 the response data will be in the following format:<br>
-                {"name": "genreName"}<br>
+                {"name": "genreName",
+                 "description": "genreDescription"}<br>
 
             <h2>Endpoint /movies/director/directorName</h2>
                 url: localhost:8081/movies/director/directorName
                 <br>
                 returns: the endpoint will return the director's name that is put in the endpoint
                 <br>
-                method: GET
+                method: GET, using Mongoose models and JSON
                 <br>
                 parameters: must be a name
                 <br>
                 the response data will be in the following format:<br>
-                {"name": "directorName"}<br>
+                {"name": "directorName",
+                 "bio": "directorBio",
+                 "birth": "directorBirthDate"}<br>
             
             <h2>Endpoint add new user</h2>
                 url: localhost:8081/users
                 <br>
                 returns: the endpoint will return what is input into the raw JSON data, as well as a user-specific ID
                 <br>
-                method: POST
+                method: POST, using Mongoose models and JSON
                 <br>
                 parameters: must be a brand new user of the app
                 <br>
                 the response data will be in the following format:<br>
                 {"name": "userName",
+                 "password": "password",
+                 "email": "userEmail",
+                 "birthday": "userBirthDate",
                  "favoriteMovies": [],
                  "id": "userId"
                 }<br>
@@ -98,7 +114,7 @@
                 <br>
                 returns: the endpoint will return a confirmation that the new movie has been added to the user's array
                 <br>
-                method: POST
+                method: POST, using Mongoose models and JSON
                 <br>
                 parameters: must be a movie
                 <br>
@@ -110,7 +126,7 @@
                 <br>
                 returns: the endpoint will return the updated user name
                 <br>
-                method: PUT
+                method: PUT, using Mongoose models and JSON
                 <br>
                 parameters: must be a name
                 <br>
@@ -124,7 +140,7 @@
                 <br>
                 returns: the endpoint will return "movieTitle has been removed from userId's array"
                 <br>
-                method: DELETE
+                method: DELETE, using Mongoose models and JSON
                 <br>
                 parameters: must be a movieTitle in the user's array
                 <br>
@@ -136,7 +152,7 @@
                 <br>
                 returns: the endpoint will return "userId has been deleted"
                 <br>
-                method: DELETE
+                method: DELETE, using Mongoose models and JSON
                 <br>
                 parameters: must be a user in the system
                 <br>
