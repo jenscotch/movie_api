@@ -1,40 +1,49 @@
 const express = require('express'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    uuid = require('uuid');
-    mongoose = require('mongoose');
+    uuid = require('uuid'),
+    mongoose = require('mongoose'),
     Models = require('./models.js');
 
 
 const app = express();
+const { check, validationResult } = require('express-validator');
+
+const Movies = Models.Movie;
+const Users = Models.User;
+const Genres = Models.Genre;
+const Directors = Models.Director;
+
+
+app.use('/documentation', express.static('public'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+const cors = require('cors');
+
+let allowedOrigins = ['http://localhost:8081', 'http://testsite.com'];
+
+app.use(cors({
+    origin: (origin, callback) => {
+        if(!origin) return callback(null, true);
+        if(allowedOrigins.indexOf(origin) === -1){
+            let message = 'The CORS policy for this application doesn\'t allow access from origin' + origin;
+            return callback(new Error(message ), false);
+        }
+        return callback(null, true);
+    }
+}));
 
 //MUST BE AFTER bodyParser!
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-const Movies = Models.Movie;
-const Users = Models.User;
+mongoose.connect('mongodb://127.0.0.1:27017/cfDB')
+    .catch(error => handleError(error));
 
-mongoose.connect('mongodb://localhost:27017/cfDB', {
-    useNewUrlParser: true, useUnifiedTopology: true
-});
 
-let users = [
-    {
-        id: 1,
-        name: 'Jen',
-        favoriteMovies: []
-    },
-    {
-        id: 2,
-        name: 'Frank',
-        favoriteMovies: ['Bad Teacher']
-    }
-];
 
 let movies = [
     {
@@ -94,13 +103,24 @@ let movies = [
     }
 ];
 
-app.use('/documentation', express.static('public'));
-
 //app.METHOD(PATH, HANDLER)
 
 //CREATE
 
-app.post('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post('/users', 
+[
+    check('Name', 'Name is required').isLength({min: 5}),
+    check('Name', 'Name contains non alpha numeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({errors: errors.array() });
+    }
+
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Name: req.body.Name })
     .then((user) => {
         if (user) {
@@ -109,7 +129,7 @@ app.post('/users', passport.authenticate('jwt', { session: false }), (req, res) 
             Users
             .create({
                 Name: req.body.Name,
-                Password: req.body.Password,
+                Password: hashedPassword,
                 Email: req.body.Email,
                 Birthday: req.body.Birthday
             })
@@ -143,7 +163,20 @@ app.post('/users/:Name/movies/:MovieID', passport.authenticate('jwt', { session:
 });
 
 //UPDATE
-app.put('/users/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.put('/users/:Name', 
+[
+    check('Name', 'Name is required').isLength({min: 5}),
+    check('Name', 'Name contains non alpha numeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({errors: errors.array() });
+    }
+
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate({Name: req.params.Name}, { $set:
     {
         Name: req.body.Name,
@@ -275,6 +308,7 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-app.listen(8081, () => {
-    console.log('Your app is listening on port 8081.');
+const port = process.env.PORT || 8081;
+app.listen(port, '0.0.0.0',() => {
+    console.log('Listening on Port ' + port);
 });
