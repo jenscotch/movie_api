@@ -1,0 +1,6 @@
+{"_id":{"$oid":"644ede6159c9496d34f921a4"},"Name":"Jennifer","Birthday":"1993-01-01","Movies":{"Title":["The Bling Ring","Long Shot","Stick It","Young Adult"]},"Password":"11111111","Email":"cartooner777@gmail.com"}
+{"_id":{"$oid":"644edf0e59c9496d34f921a5"},"Name":"Frank","Birthday":"2018-07-03","Movies":{"Title":["Bad Teacher","Long Shot","Warm Bodies"]},"Password":"12345679","Email":"cartooner777@yahoo.com"}
+{"_id":{"$oid":"644ee05059c9496d34f921a6"},"Name":"Nina","Birthday":"1955-12-02","Movies":{"Title":["Marie Antoinette","The Descendants","Stick It"]},"Password":"12345680","Email":"nina_cruzanheart@yahoo.com"}
+{"_id":{"$oid":"644ee1ac59c9496d34f921a7"},"Name":"Barbara aka Babs","Birthday":"1969-04-20","Movies":{"Title":["The Bling Ring","In a World...","The Descendants"]},"Password":"6969420","Email":"barbara@aol.com"}
+{"_id":{"$oid":"645029bd3d7dc2e001590ff6"},"Name":"jensfavoritemovies","Birthday":{"$date":"1993-10-22T00:00:00Z"},"Movies":[],"Password":"ohMyGod77","Email":"jennifer.scott9@yahoo.com","__v":0}
+{"_id":{"$oid":"645d766cabcb26ba2d3bd9e3"},"Name":"Test120","Birthday":{"$date":"2001-01-01T08:00:00Z"},"Movies":[],"Password":"$2b$10$6gVxPEeoLIs.UjWolzoNn.S/7U.GnGWNJrjD9LIh3hQo3L67Kv6MW","Email":"email@gmail.com","__v":0}

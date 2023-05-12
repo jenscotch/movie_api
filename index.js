@@ -40,9 +40,9 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
-mongoose.connect('mongodb://127.0.0.1:27017/cfDB')
+mongoose.connect( process.env.CONNECTION_URI, { 
+    useNewUrlParser: true, useUnifiedTopology: true })
     .catch(error => handleError(error));
-
 
 
 let movies = [
@@ -312,3 +312,4 @@ const port = process.env.PORT || 8081;
 app.listen(port, '0.0.0.0',() => {
     console.log('Listening on Port ' + port);
 });
+
