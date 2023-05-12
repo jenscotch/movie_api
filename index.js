@@ -14,6 +14,9 @@ const Users = Models.User;
 const Genres = Models.Genre;
 const Directors = Models.Director;
 
+app.get('/', (req, res) => {
+    res.send('Welcome to my API');
+});
 
 app.use('/documentation', express.static('public'));
 
@@ -44,64 +47,6 @@ mongoose.connect( process.env.CONNECTION_URI, {
     useNewUrlParser: true, useUnifiedTopology: true })
     .catch(error => handleError(error));
 
-
-let movies = [
-    {
-        title: 'The Bling Ring',
-        director: {
-            name: 'Sofia Coppola'
-        },
-        genre: {
-            name: 'Drama' 
-        },
-        imageURL: '#',
-        description: 'Inspired by actual events, a group of fame-obsessed teenagers use the internet to track celebrities\' whereabouts in order to rob their homes.'
-    },
-    {
-        title: 'In a World...',
-        director: {
-            name: 'Lake Bell'
-        },
-        genre: {
-            name: 'Comedy'
-        },
-        imageURL: '#',
-        description: 'An underacheiving voice coach finds herself competing in the movie trailer voice-over profession against her arrogant father and his protege.'
-    },
-    {
-        title: 'Bad Teacher',
-        director: {
-            name: 'Jake Kasdan'
-        },
-        genre: { 
-            name: 'Comedy'
-        },
-        imageURL: '#',
-        description: 'A lazy, incompetent middle school teacher who hates her job, her students, and her co-workers is forced to return to teaching to make enough money for breast implants after her wealthy fiance dumps her.'
-    },
-    {
-        title: 'The Descendants',
-        director: {
-            name: 'Alexander Payne'
-        },
-        genre: {
-            name: 'Drama'
-        },
-        imageURL: '#',
-        description: 'A land baron tries to reconnect with his two daughters after his wife is seriously injured in a boating accident.'
-    },
-    {
-        title: 'Young Adult',
-        director: {
-            name: 'Jason Reitman'
-        },
-        genre: {
-            name: 'Drama'
-        },
-        imageURL: '#',
-        description: 'Soon after her divorce, a fiction writer returns to her home in small-town Minnesota, looking to rekindle a romance with her ex-boyfriend, who is now happily married and has a newborn daughter.'
-    }
-];
 
 //app.METHOD(PATH, HANDLER)
 
