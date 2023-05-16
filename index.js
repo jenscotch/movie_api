@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 const cors = require('cors');
 app.use(cors());
 
-let allowedOrigins = ['http://localhost:8081', 'https://testsite.com', 'http://localhost:1234'];
+let allowedOrigins = ['http://localhost:8081', 'https://jens-movie-api.herokuapp.com/', 'http://localhost:1234'];
 
 app.use(cors({
     origin: (origin, callback) => {
@@ -93,7 +93,7 @@ app.post('/users',
 });
 
 //POST a movie to user's favs list
-app.post('/users/:Name/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post('/users/:Name/movies/:MovieID', (req, res) => {
     Users.findOneAndUpdate({ Name: req.params.Name }, {
         $push: { Movies: req.params.MovieID },
         },
@@ -145,7 +145,7 @@ app.put('/users/:Name',
 
 //READ
 //GET all movies
-app.get('/movies', (req, res) => {
+app.get('https://jens-movie-api.herokuapp.com/movies', (req, res) => {
     Movies.find()
     .then((movie) => {
         res.status(201).json(movie);
