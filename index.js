@@ -157,7 +157,7 @@ app.get('https://jens-movie-api.herokuapp.com/movies', (req, res) => {
 });
 
 //GET specific movie info by title
-app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/movies/:Title', (req, res) => {
     Movies.findOne({ Title: req.params.Title })
     .then((movie) => {
         res.json(movie);
@@ -169,7 +169,7 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req
 });
 
 //GET movies based on genre name
-app.get('/movies/genre/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/movies/genre/:Name', (req, res) => {
     Movies.find({ 'Genre.Name': req.params.Name })
     .then((movies) => {
         res.json(movies);
@@ -181,7 +181,7 @@ app.get('/movies/genre/:Name', passport.authenticate('jwt', { session: false }),
 });
 
 //GET movies based on director name
-app.get('/movies/director/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/movies/director/:Name', (req, res) => {
     Movies.find({ 'Director.Name': req.params.Name })
     .then((movies) => {
         res.json(movies);
