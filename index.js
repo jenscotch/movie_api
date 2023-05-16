@@ -145,7 +145,7 @@ app.put('/users/:Name',
 
 //READ
 //GET all movies
-app.get('https://jens-movie-api.herokuapp.com/movies', (req, res) => {
+app.get('/movies', (req, res) => {
     Movies.find()
     .then((movie) => {
         res.status(201).json(movie);
