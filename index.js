@@ -54,9 +54,9 @@ mongoose.connect( process.env.CONNECTION_URI, {
 
 app.post('/users', 
 [
-    check('Name', 'Name is required').isLength({min: 5}),
+    check('Name', 'Name is required').isLength({min: 3}),
     check('Name', 'Name contains non alpha numeric characters - not allowed.').isAlphanumeric(),
-    check('Password', 'Password is required').not().isEmpty()
+    check('Password', 'Password is required').not().isEmpty(),
  
 ], (req, res) => {
     let errors = validationResult(req);
