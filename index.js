@@ -110,7 +110,7 @@ app.post('/users/:Name/movies/:MovieID', (req, res) => {
 //UPDATE
 app.put('/users/:Name', 
 [
-    check('Name', 'Name is required').isLength({min: 5}),
+    check('Name', 'Name is required').isLength({min: 3}),
     check('Name', 'Name contains non alpha numeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty()
 ], (req, res) => {
