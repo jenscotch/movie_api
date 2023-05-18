@@ -56,8 +56,8 @@ app.post('/users',
 [
     check('Name', 'Name is required').isLength({min: 5}),
     check('Name', 'Name contains non alpha numeric characters - not allowed.').isAlphanumeric(),
-    check('Password', 'Password is required').not().isEmpty(),
-    check('Email', 'Email does not appear to be valid').isEmail()
+    check('Password', 'Password is required').not().isEmpty()
+ 
 ], (req, res) => {
     let errors = validationResult(req);
 
@@ -112,8 +112,7 @@ app.put('/users/:Name',
 [
     check('Name', 'Name is required').isLength({min: 5}),
     check('Name', 'Name contains non alpha numeric characters - not allowed.').isAlphanumeric(),
-    check('Password', 'Password is required').not().isEmpty(),
-    check('Email', 'Email does not appear to be valid').isEmail()
+    check('Password', 'Password is required').not().isEmpty()
 ], (req, res) => {
     let errors = validationResult(req);
 
