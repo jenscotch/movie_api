@@ -91,21 +91,7 @@ app.post('/users',
     });
 });
 
-//POST a movie to user's favs list
-app.post('/users/:Name/movies/:MovieID', (req, res) => {
-    Users.findOneAndUpdate({ Name: req.params.Name }, {
-        $push: { Movies: req.params.MovieID },
-        },
-        { new: true },
-        (err, updatedUser) => {
-            if (err) {
-                console.error(err);
-                res.status(500).send('Error:' + err)
-            } else {
-                res.json(updatedUser);
-            }
-    });
-});
+
 
 //UPDATE
 app.put('/users/:Name', 
