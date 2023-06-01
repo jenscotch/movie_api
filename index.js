@@ -2,6 +2,7 @@ const express = require('express'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     uuid = require('uuid'),
+    cors = require('cors');
     mongoose = require('mongoose'),
     Models = require('./models.js');
 
@@ -22,8 +23,8 @@ app.use('/documentation', express.static('public'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
-const cors = require('cors');
+app.use(morgan('common'));
+app.use(cors());
 
 let allowedOrigins = ['http://localhost:8081', 'https://jens-movie-api.herokuapp.com/', 'http://localhost:1234'];
 
