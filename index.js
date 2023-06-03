@@ -77,7 +77,8 @@ app.post('/users',
                 Name: req.body.Name,
                 Password: hashedPassword,
                 Email: req.body.Email,
-                Birthday: req.body.Birthday
+                Birthday: req.body.Birthday,
+                Movies: req.body.Movies,
             })
             .then((user) => {res.status(201).json(user) })
             .catch((error) => {
@@ -113,7 +114,8 @@ app.put('/users/:Name',
         Name: req.body.Name,
         Password: req.body.Password,
         Email: req.body.Email,
-        Birthday: req.body.Birthday
+        Birthday: req.body.Birthday,
+        Movies: req.body.Movies,
     }
     },
     { new: true },
@@ -204,10 +206,10 @@ app.get('/users/:Name', (req, res) => {
 // add movie to user's list of favorites
 app.post('/users/:Name/movies/:MovieId', (req, res) => {
     const Name = req.params.Name;
-    const movieID = req.params.MovieId;
+    const Movies = req.params.MovieId;
 
     Users.findOneAndUpdate({ username: Name }, {
-        $push: { favorites: movieID }
+        $push: { favorites: Movies }
     }, {new: true})
     .then(updatedUser => {
         res.json(updatedUser);
@@ -223,7 +225,7 @@ app.post('/users/:Name/movies/:MovieId', (req, res) => {
 //DELETE movie from users favs
 app.delete('/users/:Name/:movies/:MovieId', (req, res) => {
     Users.findOneAndUpdate({ username: req.params.Name }, {
-        $pul: { favorites: req.params.MovieId }
+        $pull: { favorites: req.params.MovieId }
     }, {new: true}) //this line makes sure that the updated doc is returned
     .then((updatedUser) => {
         res.json(updatedUser);
