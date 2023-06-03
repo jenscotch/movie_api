@@ -209,7 +209,7 @@ app.post('/users/:Name/movies/:MovieId', (req, res) => {
     const Movies = req.params.MovieId;
 
     Users.findOneAndUpdate({ username: Name }, {
-        $push: { favorites: Movies }
+        $push: { Movies: Movies }
     }, {new: true})
     .then(updatedUser => {
         res.json(updatedUser);
@@ -225,7 +225,7 @@ app.post('/users/:Name/movies/:MovieId', (req, res) => {
 //DELETE movie from users favs
 app.delete('/users/:Name/:movies/:MovieId', (req, res) => {
     Users.findOneAndUpdate({ username: req.params.Name }, {
-        $pull: { favorites: req.params.MovieId }
+        $pull: { Movies: req.params.MovieId }
     }, {new: true}) //this line makes sure that the updated doc is returned
     .then((updatedUser) => {
         res.json(updatedUser);
