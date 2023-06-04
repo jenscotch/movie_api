@@ -78,7 +78,6 @@ app.post('/users',
                 Password: hashedPassword,
                 Email: req.body.Email,
                 Birthday: req.body.Birthday,
-                Movies: req.body.Movies,
             })
             .then((user) => {res.status(201).json(user) })
             .catch((error) => {
@@ -115,7 +114,6 @@ app.put('/users/:Name',
         Password: req.body.Password,
         Email: req.body.Email,
         Birthday: req.body.Birthday,
-        Movies: req.body.Movies,
     }
     },
     { new: true },
