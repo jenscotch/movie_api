@@ -221,7 +221,7 @@ app.post('/users/:Name/movies/:MovieId', (req, res) => {
 
 
 //DELETE movie from users favs
-app.delete('/users/:Name/:movies/:MovieId', (req, res) => {
+app.delete('/users/:Name/movies/:MovieId', (req, res) => {
     Users.findOneAndUpdate({ username: req.params.Name }, {
         $pull: { Movies: req.params.MovieId }
     }, {new: true}) //this line makes sure that the updated doc is returned
