@@ -206,10 +206,10 @@ app.get('/users/:Name', (req, res) => {
 // add movie to user's list of favorites
 app.post('/users/:Name/movies/:MovieId', (req, res) => {
     const Name = req.params.Name;
-    const Movies = req.params.MovieId;
+    const movieID = req.params.MovieId;
 
     Users.findOneAndUpdate({ username: Name }, {
-        $push: { Movies: Movies }
+        $push: { Movies: movieID }
     }, {new: true})
     .then(updatedUser => {
         res.json(updatedUser);
