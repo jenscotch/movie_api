@@ -116,16 +116,16 @@ app.put('/users/:Name',
         Birthday: req.body.Birthday,
     }
     },
-    { new: true },
-    (err, updatedUser) => {
-        if(err) {
-            console.error(err);
-            res.status(500).send('Error:' + err);
-        } else {
-            res.json(updatedUser);
-        }
+    { new: true })
+    .then(updatedUser => {
+        res.json(updatedUser);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).send('Error: ' + err);
     });
-});
+
+    });
 
 
 //READ
