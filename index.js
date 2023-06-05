@@ -225,10 +225,10 @@ app.delete('/users/:Name/movies/:MovieId', (req, res) => {
     Users.findOneAndUpdate({ Name: req.params.Name }, {
         $pull: { Movies: req.params.MovieId }
     }, {new: true}) //this line makes sure that the updated doc is returned
-    .then((updatedUser) => {
+    .then(updatedUser => {
         res.json(updatedUser);
     })
-    .catch((err) => {
+    .catch(err => {
         console.error(err);
         res.status(500).send('Error: ' + err);
     });
@@ -238,7 +238,7 @@ app.delete('/users/:Name/movies/:MovieId', (req, res) => {
 //DELETE user by username
 app.delete('/users/:Name', (req, res) => {
     Users.findOneAndRemove({ Name: req.params.Name })
-    .then((user) => {
+    .then(user => {
         if (!user) {
             res.status(400).send(req.params.Name + ' was not found');
         } else {
