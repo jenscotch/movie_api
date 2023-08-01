@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('common'));
 app.use(cors());
 
-let allowedOrigins = ['http://localhost:8081', 'https://jens-movie-api.herokuapp.com/', 'http://localhost:4200', 'https://jensmovieapp.netlify.app', 'https://jenscotch.github.io/myFlix-Angular-client/'];
+let allowedOrigins = ['http://localhost:8081', 'https://jens-movie-api.herokuapp.com/', 'http://localhost:4200', 'https://jensmovieapp.netlify.app', 'https://jenscotch.github.io/myFlix-Angular-client'];
 
 app.use(cors({
     origin: (origin, callback) => {
