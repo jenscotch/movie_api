@@ -52,7 +52,9 @@ mongoose.connect( process.env.CONNECTION_URI, {
 //app.METHOD(PATH, HANDLER)
 
 //CREATE
-
+/**
+ * create a new user
+ */
 app.post('/users', 
 [
     check('Name', 'Name is required').isLength({min: 3}),
@@ -95,6 +97,9 @@ app.post('/users',
 
 
 //UPDATE
+/**
+ * edit user details
+ */
 app.put('/users/:Name', 
 [
     check('Name', 'Name is required').isLength({min: 3}),
@@ -130,6 +135,9 @@ app.put('/users/:Name',
 
 //READ
 //GET all movies
+/**
+ * get all movies
+ */
 app.get('/movies', (req, res) => {
     Movies.find()
     .then((movie) => {
@@ -142,6 +150,9 @@ app.get('/movies', (req, res) => {
 });
 
 //GET specific movie info by title
+/**
+ * get certain movie by title
+ */
 app.get('/movies/:Title', (req, res) => {
     Movies.findOne({ Title: req.params.Title })
     .then((movie) => {
@@ -154,6 +165,9 @@ app.get('/movies/:Title', (req, res) => {
 });
 
 //GET movies based on genre name
+/**
+ * get movie's genre
+ */
 app.get('/movies/genre/:Name', (req, res) => {
     Movies.find({ 'Genre.Name': req.params.Name })
     .then((movies) => {
@@ -166,6 +180,9 @@ app.get('/movies/genre/:Name', (req, res) => {
 });
 
 //GET movies based on director name
+/**
+ * get movie's director info
+ */
 app.get('/movies/director/:Name', (req, res) => {
     Movies.find({ 'Director.Name': req.params.Name })
     .then((movies) => {
@@ -178,6 +195,9 @@ app.get('/movies/director/:Name', (req, res) => {
 });
 
 //GET all users
+/**
+ * get all user's info
+ */
 app.get('/users', (req, res) => {
     Users.find()
     .then((users) => {
@@ -190,6 +210,9 @@ app.get('/users', (req, res) => {
 });
 
 //GET a user by name
+/**
+ * get certain user by name
+ */
 app.get('/users/:Name', (req, res) => {
     Users.findOne({ Name: req.params.Name})
     .then((user) => {
@@ -202,6 +225,9 @@ app.get('/users/:Name', (req, res) => {
 });
 
 // add movie to user's list of favorites
+/**
+ * add movie to user's list of favorite movies
+ */
 app.post('/users/:Name/movies/:MovieId', (req, res) => {
     const Name = req.params.Name;
     const movieID = req.params.MovieId;
@@ -221,6 +247,9 @@ app.post('/users/:Name/movies/:MovieId', (req, res) => {
 
 
 //DELETE movie from users favs
+/**
+ * delete movie from user's favorite movies
+ */
 app.delete('/users/:Name/movies/:MovieId', (req, res) => {
     const Name = req.params.Name;
     const movieID = req.params.MovieId;
@@ -239,6 +268,9 @@ app.delete('/users/:Name/movies/:MovieId', (req, res) => {
 
 
 //DELETE user by username
+/**
+ * delete user's info using user's name
+ */
 app.delete('/users/:Name', (req, res) => {
     Users.findOneAndRemove({ Name: req.params.Name })
     .then(user => {
