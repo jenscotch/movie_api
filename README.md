@@ -28,6 +28,6 @@ single movie by title to the user
 # Languages Utilized
 JavaScript
 
-# Other Utilized Tools (environments, frameworks, libraries, databases, middleware, etc.)
-Node.js, Express, JSON, Mongoose, MongoDB, Body-Parser, Morgan. Endpoints were tested in Postman.
+# Other Technologies Utilized
+Node.js, Express, JSON, Mongoose, MongoDB, Body-Parser, Morgan. Endpoints tested in Postman.
  
